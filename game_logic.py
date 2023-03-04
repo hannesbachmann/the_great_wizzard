@@ -28,7 +28,6 @@ def get_possible_choices(top_card, hand, play_stack=None, first_played_trump=Non
             return hand
         return possible_choices
     else:
-        round_color = None
         return hand
 
 
@@ -36,9 +35,11 @@ def predict_strikes(hand, top_card):
     """get from how much trump card, high value cards and mages"""
     count = 0
     for card in hand:
-        if top_card[0] == card[0]:
+        if top_card[0] == card[0] and card[1] > 8:
             count += 1
         elif card[0] == 'z':
+            count += 1
+        elif card[1] > 11:
             count += 1
     return count
 
@@ -53,7 +54,6 @@ class Game:
             self.cards.append(('n', 0))
 
         self.hands = [[] for p in range(players)]
-        self.strikes = [0 for p in range(players)]
         self.players = players
         self.round = 1
         self.top_card = (0, 0)
@@ -61,6 +61,9 @@ class Game:
         self.players_turn = 0
         self.current_color = None
         self.play_stack = []
+        self.players_round_scores = {f'player{i}': {'predicted': [], 'done': []} for i in range(players)}
+
+        self.highest_value = {'card': ('', 0), 'player': 1}
 
     def shuffle_card_set(self, card_set):
         card_set = card_set.copy()
@@ -87,12 +90,17 @@ class Game:
         if len(current_stack) > 0:
             self.top_card = current_stack.pop(0)
         for p in range(self.players):
-            self.strikes[p] = predict_strikes(self.hands[p], self.top_card)
+            self.players_round_scores[f'player{p}']['predicted'].append(predict_strikes(self.hands[p], self.top_card))
 
     def play_round(self):
         self.play_stack = []
-        for t in range(self.round * self.players):
-            self.play_turn(t)
+        strike_counts = [0 for i in range(self.players)]
+        for r in range(self.round):
+            for t in range(self.players):
+                self.play_turn(t)
+            strike_counts[self.highest_value["player"]] += 1
+        for p in range(self.players):
+            self.players_round_scores[f'player{p}']['done'].append(strike_counts[p])
         self.round += 1
 
     def play_turn(self, t):
@@ -112,17 +120,48 @@ class Game:
             self.play_stack.append(c)
             self.hands[self.players_turn].remove(c)
             self.current_color = c
+            self.highest_value['card'] = c
+            self.highest_value['player'] = self.players_turn
         else:
             c = play_card(trump, hand, play_stack=play_stack, first_played_trump=play_stack[0])
             self.play_stack.append(c)
             self.hands[self.players_turn].remove(c)
-        print(f'turn: {t}\tround: {self.round}\tplayer: {self.players_turn}')
+            self.calc_card_value(c)
+        print(f'turn: {t}\t|\tround: {self.round}\t|\tplayer: {self.players_turn}')
         print(f'hand: {hand}')
-        print(f'ground color: {self.play_stack[0]}\tplayed card: {c}')
+        print(f'trump: {self.top_card}\t|\tground color: {self.play_stack[0]}\t|\tplayed card: {c}\t|\thighest: {self.highest_value}')
         print('-------------------------------------------------')
         self.players_turn += 1
         if self.players_turn == self.players:
             self.players_turn = 0
+
+    def calc_card_value(self, c):
+        h_value = self.highest_value.copy()
+        # handle trump == n and trump == z
+        if self.highest_value['card'][0] == 'z':
+            return
+        if self.top_card[0] == 'z' or self.top_card[0] == 'n':
+            if c[1] > self.highest_value['card'][1]:
+                self.highest_value['card'] = c
+                self.highest_value['player'] = self.players_turn
+                return
+            elif c[0] == 'z' and h_value['card'][0] != 'z':
+                self.highest_value['card'] = c
+                self.highest_value['player'] = self.players_turn
+                return
+        if c[0] == 'z' and h_value['card'][0] != 'z':
+            self.highest_value['card'] = c
+            self.highest_value['player'] = self.players_turn
+        elif c[0] == h_value['card'][0] and c[1] > h_value['card'][1]:
+            self.highest_value['card'] = c
+            self.highest_value['player'] = self.players_turn
+        elif c[0] == self.top_card[0]:
+            if self.highest_value['card'][0] == self.top_card[0] and c[1] > h_value['card'][1]:
+                self.highest_value['card'] = c
+                self.highest_value['player'] = self.players_turn
+            elif self.highest_value['card'][0] != self.top_card[0]:
+                self.highest_value['card'] = c
+                self.highest_value['player'] = self.players_turn
 
     def ground_rules(self):
         pass
