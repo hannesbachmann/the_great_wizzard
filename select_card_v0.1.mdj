@@ -1,0 +1,288 @@
+{
+	"_type": "Project",
+	"_id": "AAAAAAFF+h6SjaM2Hec=",
+	"name": "Untitled",
+	"ownedElements": [
+		{
+			"_type": "UMLModel",
+			"_id": "AAAAAAFF+qBWK6M3Z8Y=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "Model",
+			"ownedElements": [
+				{
+					"_type": "UMLClassDiagram",
+					"_id": "AAAAAAFF+qBtyKM79qY=",
+					"_parent": {
+						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+					},
+					"name": "Main",
+					"defaultDiagram": true,
+					"ownedViews": [
+						{
+							"_type": "UMLTextBoxView",
+							"_id": "AAAAAAGGrLaOX9Bs2Tk=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 184,
+							"top": 152,
+							"width": 60,
+							"height": 38,
+							"text": "hand cards"
+						},
+						{
+							"_type": "UMLTextBoxView",
+							"_id": "AAAAAAGGrLjI4tBxTx0=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 184,
+							"top": 216,
+							"width": 60,
+							"height": 57,
+							"text": "top deck trump color"
+						},
+						{
+							"_type": "UMLTextBoxView",
+							"_id": "AAAAAAGGrLmemdB8ZcU=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 184,
+							"top": 296,
+							"width": 60,
+							"height": 64,
+							"text": "first played trump color"
+						},
+						{
+							"_type": "UMLTextBoxView",
+							"_id": "AAAAAAGGrLo6OdCC6ho=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 184,
+							"top": 384,
+							"width": 60,
+							"height": 64,
+							"text": "played cards in current turn"
+						},
+						{
+							"_type": "UMLTextBoxView",
+							"_id": "AAAAAAGGrLrYZtCHuBI=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 184,
+							"top": 472,
+							"width": 60,
+							"height": 64,
+							"text": "played cards current round"
+						},
+						{
+							"_type": "UMLTextBoxView",
+							"_id": "AAAAAAGGrLsts9CMIQY=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 184,
+							"top": 568,
+							"width": 63.47900390625,
+							"height": 38,
+							"text": "predicted strikes"
+						},
+						{
+							"_type": "UMLTextBoxView",
+							"_id": "AAAAAAGGrLuohdCRtrQ=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 184,
+							"top": 632,
+							"width": 63.47900390625,
+							"height": 51,
+							"text": "total predicted strikes"
+						},
+						{
+							"_type": "UMLTextBoxView",
+							"_id": "AAAAAAGGrLzOedCW1zc=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 320,
+							"top": 152,
+							"width": 60,
+							"height": 529,
+							"text": "apply rules: filter cards from hand cards that can be played"
+						},
+						{
+							"_type": "FreelineEdgeView",
+							"_id": "AAAAAAGGrL8AodCjBJQ=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"lineStyle": 1,
+							"points": "240:648;240:648"
+						},
+						{
+							"_type": "FreelineEdgeView",
+							"_id": "AAAAAAGGrL8ZadCmf2s=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"lineStyle": 1,
+							"points": "264:640;264:640"
+						},
+						{
+							"_type": "FreelineEdgeView",
+							"_id": "AAAAAAGGrL8pUdCphUw=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"lineStyle": 1,
+							"points": "248:656;320:656"
+						},
+						{
+							"_type": "FreelineEdgeView",
+							"_id": "AAAAAAGGrL+BZtCwneI=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"lineStyle": 1,
+							"points": "288:576;288:576"
+						},
+						{
+							"_type": "FreelineEdgeView",
+							"_id": "AAAAAAGGrL+KZtCzRK0=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"lineStyle": 1,
+							"points": "248:584;320:584"
+						},
+						{
+							"_type": "FreelineEdgeView",
+							"_id": "AAAAAAGGrL+RRdC2MH0=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"lineStyle": 1,
+							"points": "240:408;320:408"
+						},
+						{
+							"_type": "FreelineEdgeView",
+							"_id": "AAAAAAGGrL+ZwNC5Bn0=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"lineStyle": 1,
+							"points": "240:328;320:328"
+						},
+						{
+							"_type": "FreelineEdgeView",
+							"_id": "AAAAAAGGrL+iIdC8JmA=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"lineStyle": 1,
+							"points": "240:248;320:248"
+						},
+						{
+							"_type": "FreelineEdgeView",
+							"_id": "AAAAAAGGrL+qfdC/aaQ=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"lineStyle": 1,
+							"points": "240:504;320:504"
+						},
+						{
+							"_type": "FreelineEdgeView",
+							"_id": "AAAAAAGGrMC75dDR2UY=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"lineStyle": 1,
+							"points": "608:240;608:240"
+						},
+						{
+							"_type": "FreelineEdgeView",
+							"_id": "AAAAAAGGrMDFTdDU4VA=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"lineStyle": 1,
+							"points": "248:168;320:168"
+						},
+						{
+							"_type": "UMLTextBoxView",
+							"_id": "AAAAAAGGrME0X9DZcAo=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 448,
+							"top": 392,
+							"width": 60,
+							"height": 38,
+							"text": "possible choices"
+						},
+						{
+							"_type": "FreelineEdgeView",
+							"_id": "AAAAAAGGrMF7HtDevtY=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"lineStyle": 1,
+							"points": "376:408;448:408"
+						},
+						{
+							"_type": "UMLTextBoxView",
+							"_id": "AAAAAAGGrMH/jtDmx8I=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 568,
+							"top": 392,
+							"width": 60,
+							"height": 38,
+							"text": "select card"
+						},
+						{
+							"_type": "FreelineEdgeView",
+							"_id": "AAAAAAGGrMJa+dDrsbo=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"lineStyle": 1,
+							"points": "504:408;568:408"
+						}
+					]
+				}
+			]
+		}
+	]
+}
