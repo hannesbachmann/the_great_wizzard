@@ -32,6 +32,17 @@ def get_possible_choices(top_card, hand, play_stack=None, first_played_trump=Non
         return hand
 
 
+def predict_strikes(hand, top_card):
+    """get from how much trump card, high value cards and mages"""
+    count = 0
+    for card in hand:
+        if top_card[0] == card[0]:
+            count += 1
+        elif card[0] == 'z':
+            count += 1
+    return count
+
+
 class Game:
     def __init__(self, players=2):
         self.colors = ['red', 'blue', 'green', 'yellow']
@@ -42,6 +53,7 @@ class Game:
             self.cards.append(('n', 0))
 
         self.hands = [[] for p in range(players)]
+        self.strikes = [0 for p in range(players)]
         self.players = players
         self.round = 1
         self.top_card = (0, 0)
@@ -74,6 +86,8 @@ class Game:
                 self.hands[j].append(current_stack.pop(0))
         if len(current_stack) > 0:
             self.top_card = current_stack.pop(0)
+        for p in range(self.players):
+            self.strikes[p] = predict_strikes(self.hands[p], self.top_card)
 
     def play_round(self):
         self.play_stack = []
