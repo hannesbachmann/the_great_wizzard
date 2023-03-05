@@ -99,6 +99,9 @@ class Game:
             for t in range(self.players):
                 self.play_turn(t)
             strike_counts[self.highest_value["player"]] += 1
+            self.players_turn += 1
+            if self.players_turn == self.players:
+                self.players_turn = 0
         for p in range(self.players):
             self.players_round_scores[f'player{p}']['done'].append(strike_counts[p])
         self.round += 1
@@ -168,8 +171,17 @@ class Game:
 
 
 if __name__ == '__main__':
-    g = Game(2)
-    for n in range(30):
+    # from hand
+    """inputs = {'trumps': [],
+              'others c1': [],
+              'others c2': [],
+              'others c3': [],
+              'mages': 0,
+              'fools': 0}
+    outs_strikes = {'strikes': 0}"""
+
+    g = Game(4)
+    for n in range(15):
         g.start_round()
         g.play_round()
     pass
