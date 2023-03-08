@@ -1,13 +1,40 @@
 import random
 
+"""a variant of the game wizzard game, where the goal is to get at most strikes as possible"""
 
-def play_card(top_card, hand, play_stack=None, first_played_trump=None):
+
+def play_card(player, top_card, hand, play_stack=None, first_played_trump=None):
     # predicted strikes and total predicted strikes will be added soon
     possible_choices = get_possible_choices(top_card, hand, play_stack=play_stack, first_played_trump=first_played_trump)
 
-    # firstly select and play random hand card from possible ones
-    played_card = possible_choices[random.randint(0, len(possible_choices) - 1)]
+    if player == 1:
+        played_card = highest_value_select(possible_choices)
+    else:
+        played_card = random_choice_select(possible_choices)
+
     return played_card
+
+
+def brute_force_scores(top_card, hand, play_stack=None, first_played_trump=None, depth=2):
+    """go in some iterations
+    select choice with the best score for the player
+    assume both players will choose there best scores possible in each turn"""
+    for i in range(depth):
+        pass
+
+
+def random_choice_select(possible_choices):
+    # firstly select and play random hand card from possible ones
+    return possible_choices[random.randint(0, len(possible_choices) - 1)]
+
+
+def highest_value_select(possible_choices, highest_value=None):
+    best_choice = {'score': 0, 'choice': ('', 0)}
+    for choice in possible_choices:
+        score = evaluate_score(choice, highest_value=highest_value)
+        if score >= best_choice['score']:
+            best_choice['choice'] = choice
+    return best_choice['choice']
 
 
 def get_possible_choices(top_card, hand, play_stack=None, first_played_trump=None):
@@ -29,6 +56,22 @@ def get_possible_choices(top_card, hand, play_stack=None, first_played_trump=Non
         return possible_choices
     else:
         return hand
+
+
+def evaluate_score(choice, highest_value=None):
+    """
+    :param choice: one of the possible cards the player has played in this turn
+    :param highest_value: the highest card played in this round (including the current choice)
+    :return: the score of the players turn: 1 if highest_value == choice
+                                            0 otherwise
+    """
+    if highest_value is None and choice[0] != 'n':
+        return 1
+    elif highest_value is None:
+        return 0
+    if highest_value['card'][0] == choice[0] and highest_value['card'][1] == choice[1]:
+        return 1
+    return 0
 
 
 def predict_strikes(hand, top_card):
@@ -62,6 +105,7 @@ class Game:
         self.current_color = None
         self.play_stack = []
         self.players_round_scores = {f'player{i}': {'predicted': [], 'done': []} for i in range(players)}
+        self.sum_scores = {f'player{i}': 0 for i in range(players)}
 
         self.highest_value = {'card': ('', 0), 'player': 1}
 
@@ -119,14 +163,14 @@ class Game:
         if t == 0:
             # player[players_turn] start with the first turn
             # playes a tuple ('color', number) # add to play_stack, delete from hand .remove(self.play_stack[-1])
-            c = play_card(trump, hand, play_stack=None, first_played_trump=None)
+            c = play_card(self.players_turn, trump, hand, play_stack=None, first_played_trump=None)
             self.play_stack.append(c)
             self.hands[self.players_turn].remove(c)
             self.current_color = c
             self.highest_value['card'] = c
             self.highest_value['player'] = self.players_turn
         else:
-            c = play_card(trump, hand, play_stack=play_stack, first_played_trump=play_stack[0])
+            c = play_card(self.players_turn, trump, hand, play_stack=play_stack, first_played_trump=play_stack[0])
             self.play_stack.append(c)
             self.hands[self.players_turn].remove(c)
             self.calc_card_value(c)
@@ -179,9 +223,14 @@ if __name__ == '__main__':
               'mages': 0,
               'fools': 0}
     outs_strikes = {'strikes': 0}"""
-
-    g = Game(4)
-    for n in range(15):
-        g.start_round()
-        g.play_round()
+    num_players = 2
+    s = {f'player{p}': 0 for p in range(num_players)}
+    for j in range(100):
+        g = Game(num_players)
+        for n in range(int(60/num_players)):
+            g.start_round()
+            g.play_round()
+        for p in range(num_players):
+            g.sum_scores[f'player{p}'] = sum(g.players_round_scores[f'player{p}']['done'])
+            s[f'player{p}'] += g.sum_scores[f'player{p}']
     pass
